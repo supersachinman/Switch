@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<style>
+	#outer {
+	  width: 84px;
+	  height: 22px;
+	  border: 1px solid black;
+	}
+	#container {
+	  width: 80px;
+	  height: 20px;
+	  margin-top: 1px;
+	  margin-left: 2px;
+	  position: relative;
+	  background: lightgreen;
+	}
+	#animate {
+	  width: 20px;
+	  height: 22px;
+	  margin-top: -1px;
+	  margin-left: -2px;
+	  position: absolute;
+	  background-color: black;
+	}
+</style>
+<body>
+
+	<div id="check"><input type="checkbox" name="name" value="value"></div>
+	<div id ="outer">
+		<div id ="container">
+			<div id ="animate"></div>
+		</div>
+	</div>
+
+
+
+<script>
+var clickswitch = document.getElementById("animate");
+var count=0;
+clickswitch.addEventListener("click",myMove);
+function myMove() {
+  var elem = document.getElementById("animate");
+  var check = document.getElementById("check")
+  if(count%2==0)
+  {   
+    var pos = 0;
+    var checkstring = '<input type="checkbox" name="name" value="value" checked>'
+    check.innerHTML =" ";
+    var id = setInterval(frame, 5);
+    function frame() {
+      if (pos == 64) {
+        clearInterval(id);
+      } else {
+        pos+=2;  
+        elem.style.left = pos + 'px'; 
+      }
+    }
+    document.getElementById("container").style.backgroundColor = "orange";
+    check.insertAdjacentHTML('beforeend',checkstring);
+    count++;
+  }
+  else
+  {   
+    var pos = 64;
+    var checkstring = '<input type="checkbox" name="name" value="value">'
+    check.innerHTML =" ";
+    var id = setInterval(frame, 5);
+    function frame() {
+      if (pos == 0) {
+        clearInterval(id);
+      } else {
+        pos-=2;  
+        elem.style.left = pos + 'px'; 
+      }
+    }
+    document.getElementById("container").style.backgroundColor = "lightgreen";
+    check.insertAdjacentHTML('beforeend',checkstring);
+    count++;
+  }
+}
+</script>
+
+</body>
+</html>
